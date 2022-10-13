@@ -1,6 +1,6 @@
 # cards_study_app
 
-JavaScript
+JavaScript /
 MongoDb
 HTML - CSS
 Bootstrap
