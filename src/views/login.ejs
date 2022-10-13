@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/template.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+  <title>Login</title>
+</head>
+
+<body class="theme-dark">
+
+  <div class="login-wrapper">
+      <div class="d-flex justify-content-center mt-5">
+
+        <div id="loginForm" >
+            <div class="card" id="login-card">
+                <div class="card-body text-center">
+                    <h3><span class="text-carolina bold">Anki</span>App</h3>
+                </div>
+                <div class="card-body">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                          </div>
+                          <input  id="inputUser" type="text" class="form-control" placeholder="Usuario">
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                          </div>
+                          <input id="inputPassword" type="password" class="form-control" placeholder="Contraseña">
+                      </div>
+                      <div class="d-flex flex-column align-items-center">
+                        <div class="form-group text-right">
+                            <button id="btnLogin"  class="btn btn-carolina">Login</button>
+                        </div>
+                        <br>
+                        <div class="form-checkbox tex">
+                            <!-- <div class="float-right"><a href="javascript:;" class="card-link" id="forget-password">¿Olvido su Contraseña?</a></div> -->
+                          </div>
+                      </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="recoverForm" style="display: none">
+          <div class="card" id="forget-card">
+              <div class="card-body logo text-center">
+                  <h3><span class="text-carolina bold">Anki</span>App</h3>
+              </div>
+              <div class="card-body">
+                  <form action="" method="post">
+                      <div class="pb-2 text-center">
+                          <h5 class="text-center bold">Recuprar Contraseña</h5>
+                          <p>Introduzca su dirección de correo electrónico</p>
+                      </div>
+                      <div class="input-group mb-4">
+
+                          <input type="text" class="form-control" placeholder="Correo Electrónico">
+                      </div>
+                      <div style="display: flex; justify-content: center;">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-carolina">Recupear</button>
+                            <a href="#" class="btn btn-secondary" id="forget-cancel">Cancelar</a>
+                        </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+        
+      </div>
+  </div>
+
+  <script src="/js/template.js"></script>
+
+  <script>
+    const handleLogin = async () => {
+      let credentials = {
+        user: document.querySelector('#inputUser').value,
+        password: document.querySelector('#inputPassword').value
+      }
+
+      try {
+        const RawResponse =  await fetch('/login', {
+          method: 'POST', 
+          headers:{ 'Accept': 'application/json','Content-Type': 'application/json'},
+          body: JSON.stringify(credentials)
+        });
+        const response = await RawResponse.json();
+
+        if (response.success) {
+          window.location.href = "/";
+        } else {
+          alert("Usuario o contraseña incorrecta")
+        }
+
+      } catch (error) {
+        console.log('Error idk')
+      }
+    }
+
+    document.querySelector('#btnLogin').addEventListener('click', function () {
+      handleLogin();
+    })
+  </script>
+</body>
+
+</html>
