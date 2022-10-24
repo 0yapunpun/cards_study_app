@@ -8,22 +8,25 @@
   <link rel="stylesheet" href="/css/template.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
-  <title>Anki App</title>
+  <title>Study Cards</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
+  <!-- Tooltip library -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
 </head>
 
 <body class="theme-dark">
-
   <div class="grid-wrapper sidebar-bg bg1">
 
     <%- include('./partials/header.ejs') %>
 
     <%- include('./partials/asideleft.ejs') %>
 
-    <div class="main">
+    <div class="main" style="background-color: #181b1e;">
 
       <div class="w-100 d-flex justify-content-center ">
 
@@ -46,22 +49,14 @@
             <div class="card-body">
               <div class="row py-3 justify-content-center">
                 <div class="col-md-3 col-6 d-flex flex-column align-items-center">
-                  <h2 id="amountCards" class="text-Light bold">0</h2>
-                  Tarjetas
-                </div>
-                <div class="col-md-3 col-6 d-flex flex-column align-items-center">
-                  <h2 id="amountSessions" class="text-Light bold">0</h2>
-                  Sesiones
-                </div>
-                <div class="col-md-3 col-6 d-flex flex-column align-items-center text-center">
-                  <h2 id="amountAdvance" class="text-Light bold">0</h2>
-                  Porcentaje Avance
+                  <h1 id="amountCards" class="text-Light bold">0</h1>
+                  <span style="font-size: 25px">Tarjetas</span>
                 </div>
               </div>
 
               <div class="mt-5 d-flex justify-content-center flex-gap-2">
-                <button id="btnOpenCard" data-toggle="modal" data-target="#modalFormNewCard" type="button" class="btn mb-1 btn-jade">Crear Tarjeta</button>
-                <button type="button" class="btn mb-1 btn-primary mx-3">Sesion de Estudio</button>
+                <button id="btnStudySession" type="button" class="btn mb-1 btn-primary">Sesion de Estudio</button>
+                <button id="btnOpenCard" data-toggle="modal" data-target="#modalFormNewCard" type="button" class="btn mb-1 btn-jade mx-3">Crear Tarjeta</button>
                 <button id="btnOpenCardsLst" data-toggle="modal" data-target="#modalCadsList" type="button" class="btn mb-1 btn-warning">Lista de Tarjetas</button>
               </div>
 
@@ -83,7 +78,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Crear Mazo</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Mazo</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -177,28 +172,29 @@
   </div>
 
   <div class="modal fade" id="modalCadsList" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Lista de Tarjetas</h5>
-          <button id="btnCloseCardsListModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+
         <div class="">
-          <div class="card" style="border: none;">
+          <div class="card" style="border: none; position: relative">
             <div class="card-body" style="padding: 0">
               <div class="table-responsive">
                 <table class="table table-sm table-bordered table-hover" style="margin: 0;">
                   <thead class="thead-light">
                     <tr>
-                      <th class="text-center">Pregunta</th>
-                      <th class="text-center">Acción</th>
+                      <th class="text-center" style="max-width: 50%;">Pregunta</th>
+                      <th class="text-center"></th>
                     </tr>
                   </thead>
                   <tbody id="tBodyCardList"> </tbody>
                 </table>
               </div>
+            </div>
+
+            <div style="position: absolute; top: -20%; right: -30px">
+              <button style="color: white; font-size: 30px" id="btnCloseCardsListModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           </div>
         </div>
@@ -207,54 +203,80 @@
   </div>
 
   <div class="modal fade" id="modalStudySession" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered animationContainer" role="document" style="min-width: 800px;">
-      <div class="modal-content animationCard" id="animationCard">
+    <div class="modal-dialog modal-dialog-centered d-flex justify-content-center" role="document" style="min-width: 100vw; position: relative;">
+      <div id="animationCard" class="card_xx modal-content">
 
-        <div class="modal-body  d-flex justify-content-center align-items-center" style="height: 300px; position: relative;">
-
-          <div class="cardFront">
-            <div class="d-flex justify-content-center align-items-center">
+        <div class="card_face card__face--front modal-body d-flex justify-content-center align-items-center" style="position: relative; bottom: 30px">
+          <div>
+            <div id="showResponseCard" class="d-flex justify-content-center align-items-center" style="cursor: pointer; position: relative; top: 30px;">
               <span class="material-symbols-outlined" style="margin-right: 5px"> sync </span>
               Ver Respuesta
             </div>
-            <div class="text-center" style="margin-top: 30px; margin-bottom: 50px">
-              <h1>Hello World</h1>
+
+            <div class="text-center" style="margin-top: 100px; margin-bottom: 50px">
+              <h1 id="studyCardFront">Hello World</h1>
             </div>
-            <div class="d-flex justify-content-center">
-              <div>
-                <span class="material-symbols-outlined"> thumb_up </span>
+
+            <div class="d-flex justify-content-center align-items-center" style="height: 50px; position: relative; top: 40px">
+              <div class="thumbBtn">
+                <span id="downThumbBtn" class="material-symbols-outlined handBtn noselect"> thumb_down </span>
               </div>
-              <div class="mx-3">
-                <span class="material-symbols-outlined"> back_hand </span>
+              <div class="mx-4 thumbBtn">
+                <span id="upHand" class="material-symbols-outlined handBtn noselect"> back_hand </span>
               </div>
-              <div>
-                <span class="material-symbols-outlined"> thumb_down </span>
+              <div class="thumbBtn">
+                <span id="upThumbBtn" class="material-symbols-outlined handBtn noselect"> thumb_up </span>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="cardBack">
+        <div class="card_face card__face--back modal-body d-flex justify-content-center align-items-center">
+          <div>
             <div class="text-center" style="margin-top: 30px; margin-bottom: 50px">
-              <h1>Hello World Reverse</h1>
+              <h1 id="studyCardBack">Hello World Reverse</h1>
             </div>
           </div>
+        </div>
 
+        <div>
+          <div id="iconLeftModal" class="iconSideCard" style="position: absolute; left: -15%; bottom: 40%; display: none;">
+            <span class="material-symbols-outlined iconSideCard noselect hideIcon" style="font-size: 80px">
+              chevron_left
+            </span>
+          </div>
+
+          <div id="iconRightModal" style="position: absolute; right: -15%; bottom: 40%">
+            <span class="material-symbols-outlined iconSideCard noselect hideIcon" style="font-size: 80px">
+              chevron_right
+            </span>
+          </div>
+
+          <div id="btnEndSessionModal" style="position: absolute; right: -25%; bottom: 47%; display: none;">
+            <button id="btnEndSession" type="button" class="btn btn-secondary">Terminar Sesión</button>
+          </div>
+        </div>
+
+        <div>
+          <div id="iconCloseCardModal" class="hideIcon" style="position: absolute; right: 2%; top: 5%">
+            <span class="material-symbols-outlined iconSideCard noselect" style="font-size: 30px">
+              close
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div id="iconCardCounter" class="hideIcon" style="position: absolute; left: 3%; top: 5%">
+            <span id="currentCardCounter">1</span> /
+            <span id="totalCardCounter">3</span>
+          </div>
         </div>
       </div>
-      <div>
-        <div style="position: absolute; left: 105%; bottom: 35%;">
-          <span class="material-symbols-outlined" style="font-size: 80px">
-            chevron_right
-          </span>
-        </div>
-        <div style="position: absolute; right: 105%; bottom: 35%">
-          <span class="material-symbols-outlined" style="font-size: 80px">
-            chevron_left
-          </span>
-        </div>
-      </div>
+
+
     </div>
   </div>
+
 
   <script src="/js/template.js"></script>
   <script src="/js/index.js"></script>

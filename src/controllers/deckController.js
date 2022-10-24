@@ -1,4 +1,5 @@
 const controller = {};
+const { json } = require('express');
 const mongoose = require('mongoose');
 const deckModel = require('../models/deck.model');
 
@@ -131,6 +132,31 @@ controller.deleteCard = async (req, res, next) => {
           cards: {
             _id: idCard,
           },
+        },
+      }
+    );
+
+    return res.send({ success: true, message: 'succeeded operation' });
+  } catch (error) {
+    console.log(error);
+    return res.send({ success: false, message: 'failed operation' });
+  }
+};
+
+controller.setStateCard = async (req, res, next) => {
+  try {
+    let { idDeck, idCard, state } = req.body;
+
+    let currentCard = await deckModel.findOne({ _id: idDeck });
+    let currentState = currentCard.cards.find((e) => e._id.toString() == idCard);
+
+    let newState = (currentState.state || 0) + parseFloat(state);
+
+    let response = await deckModel.updateOne(
+      { _id: idDeck, 'cards._id': idCard },
+      {
+        $set: {
+          'cards.$.state': newState,
         },
       }
     );

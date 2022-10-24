@@ -20,6 +20,7 @@ router.get('/deck/delete/:id', deckController.delete);
 
 router.post('/deck/card/create', deckController.createCard);
 router.post('/deck/card/edit', deckController.editCard);
+router.post('/deck/card/state', deckController.setStateCard);
 router.get('/deck/card/delete/:idDeck/:idCard', deckController.deleteCard);
 
 module.exports = router;

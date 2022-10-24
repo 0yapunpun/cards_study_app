@@ -1,6 +1,4 @@
-.animationContainer{
-  position: absolute;
-}
+
 
 .animationCard{
   position: relative;
@@ -8,7 +6,7 @@
   transition: all 0.8s ease;
 }
 
-.card__face {
+.cardFace {
   position: absolute;
   backface-visibility: hidden;
   width: 100%;
@@ -23,9 +21,139 @@
 .cardBack {
   position: absolute;
   backface-visibility: hidden;
-  transform: rotateY(180);
+  transform: rotateY(180deg);
 }
 
 .flipCard {
   transform: rotateY(180deg);
+}
+
+/* Modal study */
+#animationCard{
+  position: absolute;
+}
+
+.animatedElement{
+  transition: all 0.5s linear;
+}
+
+.slideAnimationcardRight {
+  transform: translate(250%, 0%);
+  /* right: 200%; */
+}
+
+.slideAnimationcardLeft {
+  transform: translate(0%, 0%);
+}
+
+.card_xx{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+
+  height: 300px; 
+  width: 600px; 
+}
+
+.card_face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.card__face--front {
+}
+
+.card__face--back {
+  transform: rotateY( 180deg );
+}
+
+.card_is-flipped {
+  transform: rotateY(180deg);
+}
+
+.thumbBtn{
+  cursor: pointer;
+}
+
+#upThumbBtn{
+  transition: 0.3s;
+}
+
+#upThumbBtn:hover{
+  color: #3e8e41;
+  margin-bottom: 10px;
+  transform: scale(1.2)
+}
+
+.upThumbBtnActive{
+  color: #3e8e41;
+  margin-bottom: 10px;
+  transform: scale(1.2)
+}
+
+#downThumbBtn{
+  transition: 0.3s;
+}
+
+#downThumbBtn:hover{
+  color: red;
+  margin-top: 10px;
+  transform: scale(1.2)
+}
+
+.downThumbBtnActive{
+  color: red;
+  margin-top: 10px;
+  transform: scale(1.2)
+}
+
+#upHand{
+  transition: 0.3s;
+}
+
+#upHand:hover{
+  color: #FFF38C;
+  transform: scale(1.2)
+}
+
+.upHandActive{
+  color: #FFF38C;
+  transform: scale(1.2)
+}
+
+.inactiveHandsButtons {
+  pointer-events: none;
+}
+
+#showResponseCard{
+  transition: 0.3s;
+}
+
+#showResponseCard:hover{
+  color: white;
+  transform: scale(1.1)
+}
+
+.iconSideCard{
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.iconSideCard:hover{
+  color: white;
+  transform: scale(1.1)
+}
+
+.noselect {
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+                                
 }

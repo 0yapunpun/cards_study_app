@@ -7,10 +7,12 @@ const deckSchema = new Schema(
     name: String,
     session: Number,
     cards: [
-      new Schema({
+      {
+        id: mongoose.Schema.Types.ObjectId,
         question: String,
         answer: String,
-      }),
+        state: Number,
+      },
     ],
   },
   {
@@ -19,4 +21,3 @@ const deckSchema = new Schema(
 );
 
 module.exports = mongoose.model('Deck', deckSchema);
-``;
