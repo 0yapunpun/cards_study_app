@@ -2,7 +2,9 @@
 
 Flashcard aplication that helps you memorice and learn as efficiently as possible. Create, edit and study your flashcards
 
-![Light mode](./dark-mode.png)
+## Site
+
+(./dark-mode.png)
 
 ![Light mode](./screenshots/s1.png)
 
@@ -13,3 +15,7 @@ Flashcard aplication that helps you memorice and learn as efficiently as possibl
 ![Light mode](./screenshots/s4.png)
 
 ![Light mode](./screenshots/s5.png)
+
+## Built with 
+
+
