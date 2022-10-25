@@ -1,9 +1,5 @@
 ##  Study Flashcards Application 
 
-- [Live demo]()
-
-#### Dark mode
-
 ![Dark mode](./dark-mode.png)
 
 ![Light mode](./screenshots/s1.png)
