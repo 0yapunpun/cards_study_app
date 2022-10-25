@@ -1,8 +1,6 @@
 ##  Study Flashcards Application 
 
-Flashcard aplication that helps you memorice and learn as efficiently as possible
-
-Create, edit and study your flashcards
+Flashcard aplication that helps you memorice and learn as efficiently as possible. Create, edit and study your flashcards
 
 ![Light mode](./dark-mode.png)
 
