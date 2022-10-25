@@ -13,5 +13,8 @@ Flashcard aplication that helps you memorice and learn as efficiently as possibl
 ![Light mode](./screenshots/s5.png)
 
 ## Built with 
-
+- HTML, CSS, JavaScript
+- NodeJS
+- Express
+- MongoDB (Mongo Atlast Host)
 
