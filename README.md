@@ -16,5 +16,5 @@ Flashcard aplication that helps you memorice and learn as efficiently as possibl
 - HTML, CSS, JavaScript
 - NodeJS
 - Express
-- MongoDB (Mongo Atlast Host)
+- MongoDB (Mongo Atlas Host)
 
