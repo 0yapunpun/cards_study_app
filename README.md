@@ -1,5 +1,27 @@
-##  Study Flashcards Application 
+## Flashcards Application 
 Flashcard aplication that helps you memorice and learn as efficiently as possible. Create, edit and study your flashcards
+
+## Setup
+To run this project: 
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/0yapunpun/flashcards_app.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Init the project
+   ```sh
+   npm start
+   ```
+
+## Built with 
+- HTML, CSS, JavaScript
+- NodeJS
+- Express
+- MongoDB (Mongo Atlas Host)
 
 ## Site
 ![Light mode](./screenshots/s1.png)
@@ -12,9 +34,5 @@ Flashcard aplication that helps you memorice and learn as efficiently as possibl
 
 ![Light mode](./screenshots/s5.png)
 
-## Built with 
-- HTML, CSS, JavaScript
-- NodeJS
-- Express
-- MongoDB (Mongo Atlas Host)
+
 
